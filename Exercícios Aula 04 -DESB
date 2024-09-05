@@ -1,0 +1,218 @@
+# Classe Carro
+class Carro:
+    def __init__(self, marca, modelo, ano):
+        self.marca = marca
+        self.modelo = modelo
+        self.ano = ano
+        self.motor_ligado = False
+
+    def ligar_motor(self):
+        self.motor_ligado = True
+        print("Motor ligado.")
+
+    def desligar_motor(self):
+        self.motor_ligado = False
+        print("Motor desligado.")
+
+    def status_motor(self):
+        if self.motor_ligado:
+            return "O motor está ligado."
+        else:
+            return "O motor está desligado."
+
+# Classe Pessoa
+class Pessoa:
+    def __init__(self, nome, idade, profissao, salario):
+        self.nome = nome
+        self.idade = idade
+        self.profissao = profissao
+        self.salario = salario
+
+    def exibetrabalho(self, nome_empresa, tempo_trabalho):
+        print(f"Nome da empresa: {nome_empresa}")
+        print(f"Tempo de trabalho: {tempo_trabalho} anos")
+
+# Classe Automovel e suas classes filhas
+class Automovel:
+    def __init__(self, cor, modelo, tipo_combustivel, quantidade_rodas):
+        self.cor = cor
+        self.modelo = modelo
+        self.tipo_combustivel = tipo_combustivel
+        self.quantidade_rodas = quantidade_rodas
+
+class Carro(Automovel):
+    def ligar(self):
+        print("Carro ligado.")
+
+    def desligar(self):
+        print("Carro desligado.")
+
+    def abrir_vidro(self):
+        print("Vidro do carro aberto.")
+
+    def descer_vidro(self):
+        print("Vidro do carro fechado.")
+
+class Moto(Automovel):
+    def ligar(self):
+        print("Moto ligada.")
+
+    def desligar(self):
+        print("Moto desligada.")
+
+class Caminhao(Automovel):
+    def ligar(self):
+        print("Caminhão ligado.")
+
+    def desligar(self):
+        print("Caminhão desligado.")
+
+# Classe Cliente para transações bancárias
+class Cliente:
+    def __init__(self, nome, profissao, saldo):
+        self.nome = nome
+        self.profissao = profissao
+        self.saldo = saldo
+
+    def pix(self, valor):
+        if valor <= self.saldo:
+            self.saldo -= valor
+            print(f"PIX realizado de R${valor}. Saldo atual: R${self.saldo}.")
+        else:
+            print("Saldo insuficiente para PIX.")
+
+    def emprestimo(self, valor):
+        self.saldo += valor
+        print(f"Empréstimo de R${valor} concedido. Saldo atual: R${self.saldo}.")
+
+    def saque(self, valor):
+        if valor <= self.saldo:
+            self.saldo -= valor
+            print(f"Saque realizado de R${valor}. Saldo atual: R${self.saldo}.")
+        else:
+            print("Saldo insuficiente para saque.")
+
+    def extrato(self):
+        print(f"Saldo atual: R${self.saldo}.")
+
+# Classe Maquinas e suas classes filhas
+class Maquina:
+    def __init__(self, nome, quantidade_eixos, rotacoes_por_minuto, consumo_energia):
+        self.nome = nome
+        self.quantidade_eixos = quantidade_eixos
+        self.rotacoes_por_minuto = rotacoes_por_minuto
+        self.consumo_energia = consumo_energia
+        self.ligada = False
+
+    def ligar(self):
+        self.ligada = True
+        print(f"Máquina {self.nome} ligada.")
+
+    def desligar(self):
+        self.ligada = False
+        print(f"Máquina {self.nome} desligada.")
+
+    def ajustar_velocidade(self, nova_velocidade):
+        self.rotacoes_por_minuto = nova_velocidade
+        print(f"Velocidade ajustada para {nova_velocidade} RPM.")
+
+class Furadeira(Maquina):
+    def __init__(self, nome, rotacoes_por_minuto, consumo_energia):
+        super().__init__(nome, 1, rotacoes_por_minuto, consumo_energia)
+
+# Classe Produtos e suas classes filhas
+class Produtos:
+    def __init__(self, nome, quantidade, preco, tipo_comunicacao, consumo_energia):
+        self.nome = nome
+        self.quantidade = quantidade
+        self.preco = preco
+        self.tipo_comunicacao = tipo_comunicacao
+        self.consumo_energia = consumo_energia
+        self.ligado = False
+
+    def ligar(self):
+        self.ligado = True
+        print(f"{self.nome} ligado.")
+
+    def desligar(self):
+        self.ligado = False
+        print(f"{self.nome} desligado.")
+
+class Fritadeira(Produtos):
+    def ajustar_temperatura(self, temperatura):
+        print(f"Temperatura ajustada para {temperatura}°C.")
+
+class Televisao(Produtos):
+    def ajustar_temperatura(self, temperatura):
+        print(f"Brilho ajustado para {temperatura}%.")  # Exemplo: ajuste de brilho
+
+class ArCondicionado(Produtos):
+    def ajustar_temperatura(self, temperatura):
+        print(f"Temperatura ajustada para {temperatura}°C.")
+
+# Classe Livros
+class Livros:
+    def __init__(self, nome, quantidade, preco, autor, numero_edicao):
+        self.nome = nome
+        self.quantidade = quantidade
+        self.preco = preco
+        self.autor = autor
+        self.numero_edicao = numero_edicao
+
+    def emprestar(self):
+        if self.quantidade > 0:
+            self.quantidade -= 1
+            print(f"Livro '{self.nome}' emprestado. Quantidade restante: {self.quantidade}.")
+        else:
+            print("Não há cópias disponíveis para emprestar.")
+
+    def devolver(self):
+        self.quantidade += 1
+        print(f"Livro '{self.nome}' devolvido. Quantidade disponível: {self.quantidade}.")
+
+# Testando todas as classes
+if __name__ == "__main__":
+    # Testando a classe Carro
+    carro = Carro("Ford", "Fusion", 2022)
+    print(carro.status_motor())
+    carro.ligar_motor()
+    print(carro.status_motor())
+    carro.desligar_motor()
+    print(carro.status_motor())
+
+    # Testando a classe Pessoa
+    pessoa = Pessoa("João", 30, "Engenheiro", 5000)
+    pessoa.exibetrabalho("TechCorp", 5)
+
+    # Testando a hierarquia de Automovel
+    carro = Carro("Vermelho", "Fusca", "Gasolina", 4)
+    carro.ligar()
+    carro.abrir_vidro()
+    
+    moto = Moto("Azul", "Hornet", "Gasolina", 2)
+    moto.ligar()
+    
+    caminhao = Caminhao("Verde", "Scania", "Diesel", 6)
+    caminhao.ligar()
+
+    # Testando a classe Cliente
+    cliente = Cliente("Maria", "Analista", 1000)
+    cliente.pix(200)
+    cliente.emprestimo(500)
+    cliente.saque(300)
+    cliente.extrato()
+
+    # Testando a hierarquia de Maquinas
+    furadeira = Furadeira("Furadeira X", 1500, 500)
+    furadeira.ligar()
+    furadeira.ajustar_velocidade(2000)
+
+    # Testando a hierarquia de Produtos
+    ar_condicionado = ArCondicionado("Ar Condicionado X", 5, 2000, "Wi-Fi", 1500)
+    ar_condicionado.ligar()
+    ar_condicionado.ajustar_temperatura(22)
+
+    # Testando a classe Livros
+    livro = Livros("Python para Iniciantes", 3, 49.90, "Autor Exemplo", 1)
+    livro.emprestar()
+    livro.devolver()
